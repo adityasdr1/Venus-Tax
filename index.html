@@ -1,502 +1,154 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Venus Madam Ji ka Tax Portal 🪙</title>
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;800&family=Noto+Sans+Devanagari:wght@400;700&display=swap" rel="stylesheet"/>
-  <style>
-    :root {
-      --pink: #FF4D8D;
-      --gold: #FFD700;
-      --deep: #1A0033;
-      --lavender: #C084FC;
-      --mint: #6EE7B7;
-      --cream: #FFF8F0;
-      --card-bg: rgba(255,255,255,0.07);
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tax Pending - Miss Venuss Madam Jii 💖</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#ff9a9e,#fad0c4,#fad0c4);
+    overflow:hidden;
+}
+
+.card{
+    width:360px;
+    background:#fff;
+    border-radius:20px;
+    padding:30px;
+    text-align:center;
+    box-shadow:0 15px 35px rgba(0,0,0,.2);
+    animation:pop .6s ease;
+}
+
+@keyframes pop{
+    from{
+        transform:scale(.8);
+        opacity:0;
     }
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      background: var(--deep);
-      font-family: 'Baloo 2', 'Noto Sans Devanagari', sans-serif;
-      color: var(--cream);
-      min-height: 100vh;
-      overflow-x: hidden;
+    to{
+        transform:scale(1);
+        opacity:1;
     }
+}
 
-    /* Floating emoji background */
-    .bg-emojis {
-      position: fixed; inset: 0;
-      pointer-events: none;
-      z-index: 0;
-      overflow: hidden;
+h1{
+    color:#ff3d6e;
+    margin-bottom:10px;
+}
+
+h3{
+    color:#555;
+    margin-bottom:20px;
+}
+
+.tax-box{
+    background:#fff0f4;
+    padding:18px;
+    border-radius:15px;
+    margin:20px 0;
+    color:#444;
+    line-height:1.8;
+}
+
+button{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:30px;
+    background:#ff3d6e;
+    color:white;
+    font-size:17px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+button:hover{
+    transform:scale(1.05);
+}
+
+#loading{
+    display:none;
+    margin-top:25px;
+}
+
+.loader{
+    width:55px;
+    height:55px;
+    border:6px solid #ffd6df;
+    border-top:6px solid #ff3d6e;
+    border-radius:50%;
+    margin:auto;
+    animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+    100%{
+        transform:rotate(360deg);
     }
-    .bg-emojis span {
-      position: absolute;
-      font-size: 2rem;
-      opacity: 0.07;
-      animation: floatUp linear infinite;
-    }
+}
 
-    @keyframes floatUp {
-      0%   { transform: translateY(110vh) rotate(0deg); opacity: 0.07; }
-      100% { transform: translateY(-10vh) rotate(360deg); opacity: 0.02; }
-    }
-
-    /* Hero */
-    .hero {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      padding: 60px 24px 40px;
-    }
-
-    .stamp {
-      display: inline-block;
-      border: 4px solid var(--gold);
-      border-radius: 12px;
-      padding: 6px 18px;
-      font-size: 0.85rem;
-      letter-spacing: 3px;
-      color: var(--gold);
-      text-transform: uppercase;
-      margin-bottom: 20px;
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(255,215,0,0.4); }
-      50%       { box-shadow: 0 0 0 12px rgba(255,215,0,0); }
-    }
-
-    h1 {
-      font-size: clamp(2rem, 6vw, 4rem);
-      font-weight: 800;
-      line-height: 1.15;
-      background: linear-gradient(135deg, var(--gold), var(--pink), var(--lavender));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .subtitle {
-      margin-top: 16px;
-      font-size: 1.15rem;
-      color: #e0b0ff;
-      max-width: 560px;
-      margin-inline: auto;
-      line-height: 1.6;
-    }
-
-    .big-seal {
-      font-size: 5rem;
-      margin: 16px 0;
-      display: block;
-      animation: spin 8s linear infinite;
-    }
-    @keyframes spin {
-      from { transform: rotate(0deg); }
-      to   { transform: rotate(360deg); }
-    }
-
-    /* Tax rate board */
-    .section {
-      position: relative; z-index: 1;
-      padding: 20px 24px 40px;
-      max-width: 820px;
-      margin-inline: auto;
-    }
-
-    .section-title {
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: var(--gold);
-      text-align: center;
-      margin-bottom: 24px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-    }
-
-    .tax-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 16px;
-    }
-
-    .tax-card {
-      background: var(--card-bg);
-      border: 1px solid rgba(255,215,0,0.2);
-      border-radius: 20px;
-      padding: 24px 20px;
-      text-align: center;
-      backdrop-filter: blur(8px);
-      transition: transform 0.25s, border-color 0.25s;
-      cursor: default;
-    }
-
-    .tax-card:hover {
-      transform: translateY(-6px);
-      border-color: var(--gold);
-    }
-
-    .tax-emoji { font-size: 2.5rem; display: block; margin-bottom: 10px; }
-
-    .tax-name {
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--lavender);
-      margin-bottom: 6px;
-    }
-
-    .tax-amount {
-      font-size: 1.6rem;
-      font-weight: 800;
-      color: var(--gold);
-    }
-
-    .tax-note {
-      font-size: 0.78rem;
-      color: #a78bfa;
-      margin-top: 6px;
-      line-height: 1.4;
-    }
-
-    /* Receipt */
-    .receipt {
-      background: white;
-      color: #1a1a1a;
-      border-radius: 16px;
-      padding: 32px 28px;
-      font-family: 'Courier New', monospace;
-      position: relative;
-      z-index: 1;
-      max-width: 480px;
-      margin: 0 auto 40px;
-      box-shadow: 0 20px 60px rgba(255,77,141,0.3);
-    }
-
-    .receipt::before, .receipt::after {
-      content: '';
-      display: block;
-      height: 18px;
-      background: repeating-linear-gradient(90deg, #f0f0f0 0, #f0f0f0 12px, white 12px, white 24px);
-    }
-    .receipt::before { margin: -32px -28px 20px; border-radius: 16px 16px 0 0; }
-    .receipt::after  { margin: 20px -28px -32px; border-radius: 0 0 16px 16px; }
-
-    .receipt-header {
-      text-align: center;
-      border-bottom: 2px dashed #ccc;
-      padding-bottom: 14px;
-      margin-bottom: 14px;
-    }
-
-    .receipt-header h2 { font-size: 1.1rem; font-weight: bold; }
-    .receipt-header p  { font-size: 0.75rem; color: #888; }
-
-    .receipt-row {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.82rem;
-      margin-bottom: 8px;
-    }
-
-    .receipt-row.total {
-      font-weight: bold;
-      font-size: 1rem;
-      border-top: 2px dashed #ccc;
-      padding-top: 10px;
-      margin-top: 10px;
-      color: var(--pink);
-    }
-
-    .receipt-footer {
-      text-align: center;
-      font-size: 0.75rem;
-      color: #888;
-      margin-top: 14px;
-    }
-
-    /* Warning box */
-    .warning-box {
-      background: linear-gradient(135deg, rgba(255,77,141,0.15), rgba(192,132,252,0.15));
-      border: 2px dashed var(--pink);
-      border-radius: 16px;
-      padding: 24px;
-      text-align: center;
-      position: relative; z-index: 1;
-      max-width: 600px;
-      margin: 0 auto 50px;
-    }
-
-    .warning-box h3 {
-      color: var(--pink);
-      font-size: 1.2rem;
-      margin-bottom: 10px;
-    }
-
-    .warning-box p {
-      font-size: 0.9rem;
-      color: #ddd;
-      line-height: 1.7;
-    }
-
-    /* Pay button */
-    .pay-btn-wrap { text-align: center; z-index: 1; position: relative; margin-bottom: 60px; }
-
-    .pay-btn {
-      background: linear-gradient(135deg, var(--pink), var(--lavender));
-      color: white;
-      border: none;
-      border-radius: 999px;
-      padding: 18px 48px;
-      font-size: 1.2rem;
-      font-weight: 800;
-      font-family: 'Baloo 2', sans-serif;
-      cursor: pointer;
-      box-shadow: 0 8px 30px rgba(255,77,141,0.5);
-      transition: transform 0.2s, box-shadow 0.2s;
-      letter-spacing: 0.5px;
-    }
-
-    .pay-btn:hover {
-      transform: scale(1.07);
-      box-shadow: 0 12px 40px rgba(255,77,141,0.7);
-    }
-
-    .pay-btn:active { transform: scale(0.97); }
-
-    /* Modal */
-    .modal-overlay {
-      display: none;
-      position: fixed; inset: 0;
-      background: rgba(0,0,0,0.75);
-      z-index: 100;
-      align-items: center;
-      justify-content: center;
-    }
-    .modal-overlay.show { display: flex; }
-
-    .modal {
-      background: var(--deep);
-      border: 2px solid var(--gold);
-      border-radius: 24px;
-      padding: 40px 32px;
-      text-align: center;
-      max-width: 380px;
-      width: 90%;
-      animation: popIn 0.35s cubic-bezier(0.34,1.56,0.64,1);
-    }
-
-    @keyframes popIn {
-      from { transform: scale(0.6); opacity: 0; }
-      to   { transform: scale(1);   opacity: 1; }
-    }
-
-    .modal h2 { font-size: 1.5rem; color: var(--gold); margin-bottom: 12px; }
-    .modal p  { color: #ddd; font-size: 0.95rem; line-height: 1.6; }
-    .modal-emoji { font-size: 3.5rem; display: block; margin-bottom: 12px; }
-
-    .close-btn {
-      margin-top: 20px;
-      background: var(--pink);
-      color: white;
-      border: none;
-      border-radius: 999px;
-      padding: 10px 32px;
-      font-family: 'Baloo 2', sans-serif;
-      font-size: 1rem;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    /* Fine print */
-    .fine-print {
-      text-align: center;
-      font-size: 0.7rem;
-      color: #555;
-      padding: 0 24px 40px;
-      position: relative; z-index: 1;
-      line-height: 1.7;
-    }
-  </style>
+#loading p{
+    margin-top:15px;
+    color:#555;
+    font-weight:bold;
+}
+</style>
 </head>
+
 <body>
 
-<!-- Floating BG emojis -->
-<div class="bg-emojis" id="bgEmojis"></div>
+<div class="card">
 
-<!-- HERO -->
-<div class="hero">
-  <div class="stamp">🏛️ Government of Assu's Heart &nbsp;•&nbsp; Official Portal</div>
-  <span class="big-seal">🪙</span>
-  <h1>Venus Madam Ji<br/>Tax Collection Portal</h1>
-  <p class="subtitle">
-    Mere project dekhne ka? <br/>
-    Bilkul free nahi, Madam Ji. <br/>
-    <strong style="color: var(--gold);">Tax lagega. Terms & Conditions lagu hain.</strong> 😤
-  </p>
+<h1>💖 Tax Pending 💖</h1>
+
+<h3>Miss Venuss Madam Jii</h3>
+
+<p>Your Romantic Tax is Pending 😌</p>
+
+<div class="tax-box">
+👀 <b>Nashili Aankhon Ka Deedar</b><br><br>
+🎙️ <b>Tumhari Meethi Awaaz</b>
 </div>
 
-<!-- TAX RATES -->
-<div class="section">
-  <div class="section-title">📜 Official Tax Slab — FY Pyaar 2025-26</div>
-  <div class="tax-grid">
+<button onclick="payTax()">Pay Tax ❤️</button>
 
-    <div class="tax-card">
-      <span class="tax-emoji">👀</span>
-      <div class="tax-name">Project Dekhna Tax</div>
-      <div class="tax-amount">1 Smile</div>
-      <div class="tax-note">Har page scroll par applicable. Refund nahi milega.</div>
-    </div>
-
-    <div class="tax-card">
-      <span class="tax-emoji">😂</span>
-      <div class="tax-name">Hasna Tax</div>
-      <div class="tax-amount">1 "Haha" Reply</div>
-      <div class="tax-note">Silent hasna mana hai. Evidence required.</div>
-    </div>
-
-    <div class="tax-card">
-      <span class="tax-emoji">💬</span>
-      <div class="tax-name">Compliment Tax</div>
-      <div class="tax-amount">"Wow Assu!"</div>
-      <div class="tax-note">Minimum ek baar bolna compulsory hai by law.</div>
-    </div>
-
-    <div class="tax-card">
-      <span class="tax-emoji">🤳</span>
-      <div class="tax-name">Screenshot Tax</div>
-      <div class="tax-amount">1 DM Reply</div>
-      <div class="tax-note">Agar screenshot liya toh immediately message karo. FIR darj hogi.</div>
-    </div>
-
-    <div class="tax-card">
-      <span class="tax-emoji">😍</span>
-      <div class="tax-name">Impressed Hone Ka Tax</div>
-      <div class="tax-amount">1 ❤️ React</div>
-      <div class="tax-note">Dil mein rakhna mana hai. Public declare karo.</div>
-    </div>
-
-    <div class="tax-card">
-      <span class="tax-emoji">🫶</span>
-      <div class="tax-name">Cute Lagane Ka Tax</div>
-      <div class="tax-amount">Acknowledge karo</div>
-      <div class="tax-note">Agar Assu thoda bhi cute laga — yeh tax mandatory hai.</div>
-    </div>
-
-  </div>
+<div id="loading">
+    <div class="loader"></div>
+    <p>Redirecting to Tax Collection Department... ❤️</p>
 </div>
 
-<!-- RECEIPT -->
-<div class="section">
-  <div class="section-title">🧾 Aapka Tax Receipt</div>
-  <div class="receipt">
-    <div class="receipt-header">
-      <h2>VENUS MADAM JI TAX AUTHORITY</h2>
-      <p>Ministry of Project Approval | Reg. No. ASSU-2025-PYAAR</p>
-      <p style="margin-top:6px;">Date: Aaj ka din 📅</p>
-    </div>
-
-    <div class="receipt-row"><span>Project Dekhna (1 scroll)</span><span>1 😊</span></div>
-    <div class="receipt-row"><span>Hasna (2 baar)</span><span>2 😂</span></div>
-    <div class="receipt-row"><span>Compliment dena</span><span>1 "Wow!"</span></div>
-    <div class="receipt-row"><span>Impressed hona</span><span>1 ❤️</span></div>
-    <div class="receipt-row"><span>GST (Giggle Surcharge Tax)</span><span>Extra 1 😄</span></div>
-    <div class="receipt-row"><span>Processing Fee (non-refundable)</span><span>1 Reply</span></div>
-
-    <div class="receipt-row total">
-      <span>TOTAL DUE</span>
-      <span>Bahut kuch 😭</span>
-    </div>
-
-    <div class="receipt-footer">
-      * Agar payment nahi ki toh Assu ka dil toot jayega.<br/>
-      * Court jurisdiction: Dil ke andar, Left chamber.
-    </div>
-  </div>
 </div>
-
-<!-- WARNING -->
-<div class="section">
-  <div class="warning-box">
-    <h3>⚠️ Sarkari Chetavni</h3>
-    <p>
-      Yeh project <strong>Venus Madam Ji</strong> ke liye specially banaya gaya hai.<br/>
-      Kisi aur ne dekha toh <strong>double tax</strong> lagega. 😤<br/><br/>
-      Tax evasion par saza: Assu ka <em>sad face</em> dekhna padega.<br/>
-      Aur yeh bahut mushkil hota hai, trust karo. 🥺
-    </p>
-  </div>
-</div>
-
-<!-- PAY BUTTON -->
-<div class="pay-btn-wrap">
-  <button class="pay-btn" onclick="payTax()">
-    💳 Tax Jama Karo — Abhi Karo!
-  </button>
-</div>
-
-<!-- MODAL -->
-<div class="modal-overlay" id="modal">
-  <div class="modal">
-    <span class="modal-emoji" id="modalEmoji">✅</span>
-    <h2 id="modalTitle">Shukriya!</h2>
-    <p id="modalMsg">Aapka tax receipt process ho raha hai...<br/>Ek minute mein Assu ka dil khush ho jayega. 🥹</p>
-    <button class="close-btn" onclick="closeModal()">Theek Hai, Bhai! 🙏</button>
-  </div>
-</div>
-
-<!-- FINE PRINT -->
-<p class="fine-print">
-  * Yeh ek fictional tax portal hai. Koi asli paisa mat bhejo please.<br/>
-  * Venus Madam Ji ke reactions asli currency hain.<br/>
-  * Assu responsible nahi hai agar aap yeh padh ke muskura dein. Tax lagega.<br/>
-  * Complaints: /dev/null par bhejein. 📬
-</p>
 
 <script>
-  // BG emojis
-  const emojis = ['🪙','💸','📜','⚖️','🏛️','💰','🪙','😂','❤️','🎯'];
-  const bg = document.getElementById('bgEmojis');
-  for (let i = 0; i < 25; i++) {
-    const s = document.createElement('span');
-    s.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-    s.style.left = Math.random() * 100 + 'vw';
-    s.style.top = Math.random() * 100 + 'vh';
-    s.style.animationDuration = (10 + Math.random() * 20) + 's';
-    s.style.animationDelay = (-Math.random() * 20) + 's';
-    s.style.fontSize = (1.5 + Math.random() * 2) + 'rem';
-    bg.appendChild(s);
-  }
 
-  const responses = [
-    { emoji: '🥳', title: 'Tax Paid!', msg: 'Shukriya Venus Madam Ji! Aapka compliance record updated ho gaya. Project approved hai officially! 🎉' },
-    { emoji: '😂', title: 'Processing...', msg: 'Assu ki smile ka meter full ho gaya. Server crash kar gaya khushi mein. Please reload your heart. 💘' },
-    { emoji: '🫶', title: 'Maan Gaye!', msg: 'Receipt generate ho rahi hai. Ek copy Assu ke dil mein file ho gayi. Permanent record. ❤️' },
-    { emoji: '🪙', title: 'Sona Madam Ji!', msg: 'Aapne tax pay kiya, ab project dekh sakte ho — but Assu bhi free nahi aata. Next tax slab applicable hai. 😇' },
-  ];
+function payTax(){
 
-  function payTax() {
-    const r = responses[Math.floor(Math.random() * responses.length)];
-    document.getElementById('modalEmoji').textContent = r.emoji;
-    document.getElementById('modalTitle').textContent = r.title;
-    document.getElementById('modalMsg').textContent = r.msg;
-    document.getElementById('modal').classList.add('show');
-  }
+    document.getElementById("loading").style.display="block";
 
-  function closeModal() {
-    document.getElementById('modal').classList.remove('show');
-  }
+    // Replace this with her Instagram username
+    const username = "assu.assus";
 
-  document.getElementById('modal').addEventListener('click', function(e) {
-    if (e.target === this) closeModal();
-  });
+    setTimeout(function(){
+
+        window.open("https://instagram.com/" + username,"_blank");
+
+    },2000);
+
+}
+
 </script>
-</body>
-      </html>
 
+</body>
+</html>
