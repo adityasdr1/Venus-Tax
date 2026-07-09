@@ -3,152 +3,173 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tax Pending - Miss Venuss Madam Jii 💖</title>
-
+<title>Mahadev</title>
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, sans-serif;
-}
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=EB+Garamond:ital,wght@0,400;1,400&display=swap');
 
-body{
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:linear-gradient(135deg,#ff9a9e,#fad0c4,#fad0c4);
-    overflow:hidden;
-}
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-.card{
-    width:360px;
-    background:#fff;
-    border-radius:20px;
-    padding:30px;
-    text-align:center;
-    box-shadow:0 15px 35px rgba(0,0,0,.2);
-    animation:pop .6s ease;
-}
+  body {
+    background: radial-gradient(ellipse at 50% 20%, #16213a 0%, #0a0e1a 55%, #05070d 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    font-family: 'EB Garamond', serif;
+  }
 
-@keyframes pop{
-    from{
-        transform:scale(.8);
-        opacity:0;
-    }
-    to{
-        transform:scale(1);
-        opacity:1;
-    }
-}
+  /* drifting ash particles */
+  .ash {
+    position: fixed;
+    top: -10px;
+    width: 3px;
+    height: 3px;
+    background: #9aa4bd;
+    border-radius: 50%;
+    opacity: 0.5;
+    animation: fall linear infinite;
+  }
+  @keyframes fall {
+    to { transform: translateY(110vh) translateX(20px); opacity: 0; }
+  }
 
-h1{
-    color:#ff3d6e;
-    margin-bottom:10px;
-}
+  .stage {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 40px 24px;
+    max-width: 620px;
+  }
 
-h3{
-    color:#555;
-    margin-bottom:20px;
-}
+  .moon-wrap {
+    position: relative;
+    width: 140px;
+    height: 140px;
+    margin: 0 auto 18px;
+  }
 
-.tax-box{
-    background:#fff0f4;
-    padding:18px;
-    border-radius:15px;
-    margin:20px 0;
-    color:#444;
-    line-height:1.8;
-}
+  .glow {
+    position: absolute;
+    inset: -40px;
+    background: radial-gradient(circle, rgba(201,162,39,0.25) 0%, rgba(201,162,39,0) 70%);
+    animation: pulse 4s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 0.5; transform: scale(0.95); }
+    50% { opacity: 1; transform: scale(1.05); }
+  }
 
-button{
-    width:100%;
-    padding:14px;
-    border:none;
-    border-radius:30px;
-    background:#ff3d6e;
-    color:white;
-    font-size:17px;
-    cursor:pointer;
-    transition:.3s;
-}
+  .trishul {
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 120px;
+    opacity: 0.9;
+  }
 
-button:hover{
-    transform:scale(1.05);
-}
+  .om {
+    font-family: 'Cinzel', serif;
+    font-size: 44px;
+    color: #d8c58a;
+    text-shadow: 0 0 18px rgba(216,197,138,0.6);
+    position: relative;
+    z-index: 3;
+  }
 
-#loading{
-    display:none;
-    margin-top:25px;
-}
+  .eyebrow {
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.35em;
+    font-size: 12px;
+    color: #6f7893;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
 
-.loader{
-    width:55px;
-    height:55px;
-    border:6px solid #ffd6df;
-    border-top:6px solid #ff3d6e;
-    border-radius:50%;
-    margin:auto;
-    animation:spin 1s linear infinite;
-}
+  h1 {
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+    font-size: clamp(28px, 5vw, 42px);
+    color: #e8e4d8;
+    letter-spacing: 0.04em;
+    margin-bottom: 28px;
+    text-shadow: 0 0 30px rgba(201,162,39,0.15);
+  }
 
-@keyframes spin{
-    100%{
-        transform:rotate(360deg);
-    }
-}
+  .divider {
+    width: 70px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #c9a227, transparent);
+    margin: 0 auto 28px;
+  }
 
-#loading p{
-    margin-top:15px;
-    color:#555;
-    font-weight:bold;
-}
+  .message {
+    font-style: italic;
+    font-size: clamp(19px, 3vw, 24px);
+    line-height: 1.9;
+    color: #b9c0d4;
+  }
+
+  .message .line2 {
+    display: block;
+    margin-top: 10px;
+    color: #8b93a5;
+  }
+
+  .signature {
+    margin-top: 40px;
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: #4d5470;
+    text-transform: uppercase;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ash, .glow { animation: none; }
+  }
 </style>
 </head>
-
 <body>
 
-<div class="card">
+  <div class="stage">
+    <div class="moon-wrap">
+      <div class="glow"></div>
+      <svg class="trishul" viewBox="0 0 60 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="30" y1="10" x2="30" y2="115" stroke="#c9a227" stroke-width="2"/>
+        <path d="M30 10 C20 5, 15 -5, 20 -12 C24 -6, 28 -6, 30 -12 C32 -6, 36 -6, 40 -12 C45 -5, 40 5, 30 10 Z"
+              stroke="#c9a227" stroke-width="1.5" fill="none" transform="translate(0,18)"/>
+      </svg>
+      <div class="om">ॐ</div>
+    </div>
 
-<h1>💖 Tax Pending 💖</h1>
+    <div class="eyebrow">to be honest</div>
+    <h1>Even the Destroyer Can Be Wrong</h1>
+    <div class="divider"></div>
 
-<h3>Miss Venuss Madam Jii</h3>
+    <p class="message">
+      Mahadev was wrong this time...
+      <span class="line2">And you were right venuss — the dream never came true.</span>
+    </p>
 
-<p>Your Romantic Tax is Pending 😌</p>
+    <div class="signature">Sorry if i have ever hurt you</div>
+  </div>
 
-<div class="tax-box">
-👀 <b>Nashili Aankhon Ka Deedar</b><br><br>
-🎙️ <b>Tumhari Meethi Awaaz</b>
-</div>
-
-<button onclick="payTax()">Pay Tax ❤️</button>
-
-<div id="loading">
-    <div class="loader"></div>
-    <p>Redirecting to Tax Collection Department... ❤️</p>
-</div>
-
-</div>
-
-<script>
-
-function payTax(){
-
-    document.getElementById("loading").style.display="block";
-
-    // Replace this with her Instagram username
-    const username = "assu.assus";
-
-    setTimeout(function(){
-
-        window.open("https://instagram.com/" + username,"_blank");
-
-    },2000);
-
-}
-
-</script>
+  <script>
+    const ashCount = 40;
+    for (let i = 0; i < ashCount; i++) {
+      const a = document.createElement('div');
+      a.className = 'ash';
+      a.style.left = Math.random() * 100 + 'vw';
+      a.style.animationDuration = (6 + Math.random() * 8) + 's';
+      a.style.animationDelay = (Math.random() * 8) + 's';
+      a.style.width = a.style.height = (1.5 + Math.random() * 2) + 'px';
+      document.body.appendChild(a);
+    }
+  </script>
 
 </body>
 </html>
